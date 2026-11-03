@@ -1218,3 +1218,13 @@ body[data-page="home"] .header:not(.is-solid) .cart-count { background: var(--pa
 
 .kit-msg { display: block; line-height: 1.4; }
 .kit-msg .r-dot { vertical-align: -3px; margin-right: 6px; }
+
+/* Header sobre el hero: logo en blanco; con el menú abierto, header sólido */
+body[data-page="home"] .header:not(.is-solid) .header__logo { color: var(--paper); }
+body[data-page="home"] .header:has(.mega.is-open) .header__bar { color: var(--ink); background: var(--paper); box-shadow: 0 1px 0 var(--line-soft); }
+body[data-page="home"] .header:has(.mega.is-open) .header__logo { color: var(--ink); }
+body[data-page="home"] .header:has(.mega.is-open) .cart-count { background: var(--ink); color: var(--paper); }
+
+/* Hero con la foto de mayor resolución */
+.hero__media img { transform: scale(1.02); object-position: 50% 58%; }
+@media (max-width: 900px) { .hero__media img { object-position: 50% 45%; } }
