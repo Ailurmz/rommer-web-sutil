@@ -1,6 +1,6 @@
 # Rommer: prototipo web e-commerce
 
-Prototipo navegable (HTML/CSS/JS) de la tienda online de **Rommer**, cuidado capilar con actitud de marca de consumo. Versión con paleta blanco y negro.
+Prototipo navegable (HTML/CSS/JS) de la tienda online de **Rommer**, cuidado capilar con actitud de marca de consumo. Versión sutil (editorial, blanco y negro).
 
 ![Vista previa](preview.png)
 

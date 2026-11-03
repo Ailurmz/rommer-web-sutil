@@ -307,7 +307,7 @@
       mt.addEventListener("click", function () { mega.classList.contains("is-open") ? close() : open(); });
     }
     var mm = $(".mmenu");
-    $$(".js-burger").forEach(function (b) { b.addEventListener("click", function () { mm.classList.add("is-open"); if (lenis) lenis.stop(); if (window.gsap && !REDUCED) gsap.from($$(".mmenu a.big"), { y: 60, opacity: 0, rotate: 4, stagger: .06, duration: .7, ease: "back.out(1.6)", delay: .15 }); }); });
+    $$(".js-burger").forEach(function (b) { b.addEventListener("click", function () { mm.classList.add("is-open"); if (lenis) lenis.stop(); if (window.gsap && !REDUCED) gsap.from($$(".mmenu a.big"), { y: 30, opacity: 0, stagger: .05, duration: .6, ease: "power3.out", delay: .15 }); }); });
     $$(".mmenu a").forEach(function (a) { a.addEventListener("click", closeAll); });
 
     var se = $(".search"), si = $(".search__input"), sr = $(".search__results");
@@ -329,7 +329,7 @@
     window.addEventListener("mousemove", function (e) { x = e.clientX; y = e.clientY; c.classList.add("is-on"); }, { passive: true });
     document.addEventListener("mouseleave", function () { c.classList.remove("is-on"); });
     document.addEventListener("mouseover", function (e) { c.classList.toggle("is-hover", !!e.target.closest("a,button,.ba,[data-sticker],input,select,summary")); });
-    (function loop() { cx += (x - cx) * .2; cy += (y - cy) * .2; rot += (x - cx) * .02; c.style.transform = "translate(" + cx + "px," + cy + "px) rotate(" + rot + "deg)"; requestAnimationFrame(loop); })();
+    (function loop() { cx += (x - cx) * .2; cy += (y - cy) * .2; rot += (x - cx) * .008; c.style.transform = "translate(" + cx + "px," + cy + "px) rotate(" + rot + "deg)"; requestAnimationFrame(loop); })();
   }
 
   /* ---------- Antes / después ---------- */
@@ -354,7 +354,7 @@
           if (sec) { sec.style.setProperty("--tabc", COLOR[b.dataset.c]); $(".star-prod__bottle", sec).style.setProperty("--tint", TINT[b.dataset.t]); }
           var pnl = document.getElementById(b.getAttribute("aria-controls"));
           if (window.gsap && !REDUCED) gsap.from($$("li, .h-md, .btn", pnl), { y: 18, opacity: 0, stagger: .05, duration: .5, ease: "back.out(1.5)" });
-          if (window.gsap && !REDUCED && sec) gsap.fromTo($(".star-prod__bottle", sec), { rotate: -8, scale: .94 }, { rotate: 0, scale: 1, duration: .8, ease: "elastic.out(1,.5)" });
+          if (window.gsap && !REDUCED && sec) gsap.fromTo($(".star-prod__bottle", sec), { scale: .97, opacity: .6 }, { scale: 1, opacity: 1, duration: .6, ease: "power2.out" });
         });
       });
     });
@@ -385,12 +385,10 @@
     store.sset("rommer-intro", "1");
     var L = $$(".wordmark .L", pre);
     var tl = gsap.timeline({ onComplete: function () { pre.classList.add("is-skip"); } });
-    tl.from(L, { yPercent: 120, scaleY: .3, opacity: 0, stagger: .07, duration: .7, ease: "back.out(2.2)" })
-      .to($(".preloader__bar i", pre), { scaleX: 1, duration: .6, ease: "power2.inOut" }, "-=.4")
-      .to(L, { scaleY: 1.25, yPercent: -6, stagger: .03, duration: .18, ease: "power2.out" })
-      .to(L, { scaleY: .1, yPercent: 40, opacity: 0, stagger: .03, duration: .3, ease: "power3.in" })
-      .to(pre, { clipPath: "inset(0 0 100% 0 round 0 0 40px 40px)", duration: .7, ease: "power4.inOut" }, "-=.15")
-      .add(after, "-=.45");
+    tl.from(L, { yPercent: 40, opacity: 0, stagger: .035, duration: .35, ease: "power3.out" })
+      .to($(".preloader__bar i", pre), { scaleX: 1, duration: .3, ease: "power2.inOut" }, "-=.2")
+      .to(pre, { autoAlpha: 0, duration: .3, ease: "power2.out" }, "+=.05")
+      .add(after, "-=.25");
   }
 
   function animations(page) {
@@ -406,7 +404,7 @@
     if (par.length && matchMedia("(hover: hover)").matches) {
       window.addEventListener("mousemove", function (e) {
         var x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
-        par.forEach(function (el) { var d = +el.dataset.depth; gsap.to(el, { x: x * d * 60, y: y * d * 60, duration: 1.2, ease: "power3.out" }); });
+        par.forEach(function (el) { var d = +el.dataset.depth; gsap.to(el, { x: x * d * 40, y: y * d * 40, duration: 1.4, ease: "power3.out" }); });
       }, { passive: true });
     }
     // Stickers que aparecen al entrar
@@ -417,16 +415,16 @@
 
     // Wordmark del footer
     var fw = $$(".footer__word .L");
-    if (fw.length) gsap.from(fw, { yPercent: 110, scaleY: .4, stagger: .06, ease: "back.out(1.6)", duration: 1, scrollTrigger: { trigger: ".footer__word", start: "top 95%", end: "bottom bottom", toggleActions: "play none none reverse" } });
+    if (fw.length) gsap.from(fw, { yPercent: 80, opacity: 0, stagger: .05, ease: "power3.out", duration: .9, scrollTrigger: { trigger: ".footer__word", start: "top 95%", end: "bottom bottom", toggleActions: "play none none reverse" } });
   }
 
   function heroIntro() {
     if (REDUCED || !window.gsap) return;
     var tl = gsap.timeline();
-    tl.from(".hero__title .line > span", { yPercent: 115, rotate: 4, duration: 1, stagger: .09, ease: "power4.out" })
+    tl.from(".hero__title .line > span", { yPercent: 110, duration: .9, stagger: .08, ease: "power4.out" })
       .from(".hero__copy .lead, .hero__ctas, .hero__copy .eyebrow", { y: 24, opacity: 0, stagger: .08, duration: .7, ease: "power3.out" }, "-=.6")
-      .from(".hero__word .L", { yPercent: 105, scaleY: .25, stagger: .07, duration: 1.1, ease: "elastic.out(1, .55)" }, "-=.8")
-      .from(".hero .sticker", { scale: 0, rotate: -60, stagger: .08, duration: .8, ease: "back.out(2.5)" }, "-=.9")
+      .from(".hero__word .L", { yPercent: 60, opacity: 0, stagger: .05, duration: .9, ease: "power3.out" }, "-=.7")
+      .from(".hero .sticker", { scale: .8, opacity: 0, duration: .6, ease: "power2.out" }, "-=.6")
       .to(".hero__scribble path", { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, "-=.6");
     return tl;
   }
@@ -434,8 +432,8 @@
   function homeAnimations(mm) {
     // Wordmark del hero se "derrite" con el scroll
     var hl = $$(".hero__word .L");
-    var melt = [0, 14, -8, 18, -6, 10];
-    gsap.to(hl, { yPercent: function (i) { return melt[i]; }, scaleY: function (i) { return i % 2 ? 1.22 : .9; }, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .6 } });
+    var melt = [0, 4, -2, 5, -2, 3];
+    gsap.to(hl, { yPercent: function (i) { return melt[i]; }, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .6 } });
     gsap.to(".hero__media img", { yPercent: 10, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
     // Banners 50/50 parallax
@@ -456,22 +454,22 @@
     var frames = $$(".star-prod__bottle img");
     if (frames.length) {
       ScrollTrigger.create({ trigger: ".star-prod", start: "top 70%", end: "bottom 30%", scrub: true, onUpdate: function (st) { var i = Math.min(frames.length - 1, Math.floor(st.progress * frames.length)); frames.forEach(function (f, k) { f.classList.toggle("is-active", k === i); }); } });
-      gsap.fromTo(".star-prod__bottle", { rotate: -6, y: 40 }, { rotate: 6, y: -40, ease: "none", scrollTrigger: { trigger: ".star-prod", scrub: true } });
+      gsap.fromTo(".star-prod__bottle", { y: 30 }, { y: -30, ease: "none", scrollTrigger: { trigger: ".star-prod", scrub: true } });
     }
 
     // Video full-bleed
     gsap.fromTo(".film__media", { scale: 1.2 }, { scale: 1, ease: "none", scrollTrigger: { trigger: ".film", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.from(".film .w", { yPercent: 100, opacity: 0, rotate: 6, stagger: .06, duration: .8, ease: "back.out(1.8)", scrollTrigger: { trigger: ".film", start: "top 60%" } });
+    gsap.from(".film .w", { yPercent: 60, opacity: 0, stagger: .05, duration: .8, ease: "power3.out", scrollTrigger: { trigger: ".film", start: "top 60%" } });
 
-    gsap.from(".need", { y: 80, rotate: function (i) { return i % 2 ? 6 : -6; }, opacity: 0, stagger: .08, duration: .9, ease: "back.out(1.4)", scrollTrigger: { trigger: ".needs", start: "top 85%" } });
+    gsap.from(".need", { y: 40, opacity: 0, stagger: .07, duration: .8, ease: "power3.out", scrollTrigger: { trigger: ".needs", start: "top 85%" } });
 
     // Kit: abanico de envases
     var fan = $$(".kit__fan img");
     if (fan.length) {
-      var ang = [-24, -8, 8, 24], xs = [-90, -35, 35, 90];
+      var ang = [0, 0, 0, 0], xs = [-165, -55, 55, 165];
       gsap.set(fan, { xPercent: -50 });
-      gsap.fromTo(fan, { rotate: 0, x: 0 }, { rotate: function (i) { return ang[i]; }, x: function (i) { return xs[i] + "%"; }, duration: 1.2, stagger: .05, ease: "elastic.out(1,.6)", scrollTrigger: { trigger: ".kit", start: "top 70%" } });
-      gsap.from(".kit__word", { scale: .6, rotate: -14, opacity: 0, duration: 1, ease: "back.out(1.8)", scrollTrigger: { trigger: ".kit", start: "top 75%" } });
+      gsap.fromTo(fan, { rotate: 0, x: 0 }, { rotate: function (i) { return ang[i]; }, x: function (i) { return xs[i] + "%"; }, duration: .9, stagger: .05, ease: "power3.out", scrollTrigger: { trigger: ".kit", start: "top 70%" } });
+      gsap.from(".kit__word", { y: 30, opacity: 0, duration: .9, ease: "power3.out", scrollTrigger: { trigger: ".kit", start: "top 75%" } });
     }
 
     // Manifiesto: las palabras vuelan a su lugar
@@ -481,7 +479,7 @@
     });
 
     // Destacado: tarjeta flotante
-    gsap.from(".spot__card", { y: 60, opacity: 0, rotate: -3, duration: 1, ease: "back.out(1.6)", scrollTrigger: { trigger: ".spot", start: "top 70%" } });
+    gsap.from(".spot__card", { y: 30, opacity: 0, duration: .8, ease: "power3.out", scrollTrigger: { trigger: ".spot", start: "top 70%" } });
   }
 
   function productAnimations() {
@@ -523,7 +521,7 @@
 
     // Galería
     var slides = [0, 1, 2, 3].map(function (i) { return { src: IMG + "bottle-" + i + ".webp", bottle: true }; });
-    slides.push({ src: IMG + "campaign-yellow.webp" }, { src: IMG + "packaging-4.webp" }, { src: IMG + "face-stickers.webp" });
+    slides.push({ src: IMG + "campaign-pink.webp" }, { src: IMG + "packaging-4-bordo.webp" }, { src: IMG + "face-stickers.webp" });
     $(".gallery__main .swiper-wrapper").innerHTML = slides.map(function (s, i) { return '<div class="swiper-slide"><img class="' + (s.bottle ? "bottle" : "") + '" src="' + s.src + '" alt="' + p.name + " — imagen " + (i + 1) + '"' + (i ? ' loading="lazy"' : "") + "></div>"; }).join("");
     $(".gallery__thumbs").innerHTML = slides.map(function (s, i) { return '<button type="button" aria-label="Ver imagen ' + (i + 1) + '" aria-current="' + (i === 0) + '"><img class="' + (s.bottle ? "bottle" : "") + '" src="' + s.src + '" alt="" loading="lazy"></button>'; }).join("");
     var gsw = typeof Swiper !== "undefined" ? new Swiper(".gallery__main .swiper", { pagination: { el: ".gallery__main .swiper-pagination", clickable: true }, speed: 600, grabCursor: true }) : null;
